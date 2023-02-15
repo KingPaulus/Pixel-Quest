@@ -16,6 +16,8 @@ public class Game extends JPanel implements KeyListener {
     private int playerX = 50;
     private int playerY = 50;
     private BufferedImage playerTexture;
+    private int screenWidth;
+    private int screenHeight;
 
     public Game() {
         JFrame frame = new JFrame("My Game");
@@ -30,6 +32,9 @@ public class Game extends JPanel implements KeyListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        screenWidth = frame.getContentPane().getWidth();
+        screenHeight = frame.getContentPane().getHeight();
     }
 
     public void paint(Graphics g) {
@@ -41,16 +46,24 @@ public class Game extends JPanel implements KeyListener {
         int keyCode = e.getKeyCode();
         switch (keyCode) {
             case KeyEvent.VK_UP:
-                playerY -= 10;
+                if (playerY > 0) {
+                    playerY -= 10;
+                }
                 break;
             case KeyEvent.VK_DOWN:
-                playerY += 10;
+                if (playerY < screenHeight - 50) {
+                    playerY += 10;
+                }
                 break;
             case KeyEvent.VK_LEFT:
-                playerX -= 10;
+                if (playerX > 0) {
+                    playerX -= 10;
+                }
                 break;
             case KeyEvent.VK_RIGHT:
-                playerX += 10;
+                if (playerX < screenWidth - 50) {
+                    playerX += 10;
+                }
                 break;
         }
         repaint();
