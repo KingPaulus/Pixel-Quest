@@ -1,5 +1,4 @@
 package PixelQuest;
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
@@ -16,6 +15,7 @@ public class Game extends JPanel implements KeyListener {
     private int playerX = 50;
     private int playerY = 50;
     private BufferedImage playerTexture;
+    private BufferedImage backgroundImage;
     private int screenWidth;
     private int screenHeight;
 
@@ -29,6 +29,7 @@ public class Game extends JPanel implements KeyListener {
 
         try {
             playerTexture = ImageIO.read(new File("image/player.png"));
+            backgroundImage = ImageIO.read(new File("image/background.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -39,6 +40,7 @@ public class Game extends JPanel implements KeyListener {
 
     public void paint(Graphics g) {
         super.paint(g);
+        g.drawImage(backgroundImage, 0, 0, null);
         g.drawImage(playerTexture, playerX, playerY, null);
     }
 
