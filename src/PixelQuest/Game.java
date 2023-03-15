@@ -20,6 +20,7 @@ public class Game extends JPanel implements KeyListener {
     private int playerX = 50;
     private int playerY = 50;
     private BufferedImage playerTexture;
+    Image scaledImage;
     private BufferedImage backgroundImage;
     private int screenWidth;
     private int screenHeight;
@@ -32,7 +33,7 @@ public class Game extends JPanel implements KeyListener {
         JFrame frame = new JFrame("My Game");
         frame.add(this);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 400);
+        frame.setSize(800, 800);
         frame.setVisible(true);
         frame.addKeyListener(this);
 
@@ -40,6 +41,13 @@ public class Game extends JPanel implements KeyListener {
             playerTexture = ImageIO.read(new File("image/player.png"));
             backgroundImage = ImageIO.read(new File("image/background.png"));
             coinTexture = ImageIO.read(new File("image/coin.png"));
+
+            // Calculate the desired width and height of the scaled-down image
+            int scaledWidth = playerTexture.getWidth(null) / 2;  // divide by 2 to scale down by 50%
+            int scaledHeight = playerTexture.getHeight(null) / 2;
+
+            // Create a new image that is a scaled-down version of the original
+            scaledImage = playerTexture.getScaledInstance(scaledWidth, scaledHeight, Image.SCALE_SMOOTH);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -58,7 +66,7 @@ public class Game extends JPanel implements KeyListener {
     public void paint(Graphics g) {
         super.paint(g);
         g.drawImage(backgroundImage, 0, 0, null);
-        g.drawImage(playerTexture, playerX, playerY, null);
+        g.drawImage(scaledImage, playerX, playerY, null);
 
         // Draw the coins on the screen
         for (Coin coin : coins) {
