@@ -39,7 +39,7 @@ public class Game extends JPanel implements KeyListener {
     private boolean endscreen = false;
 
     public Game() {
-        JFrame frame = new JFrame("My Game");
+        JFrame frame = new JFrame("Pixel Quest");
         frame.add(this);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 800);
